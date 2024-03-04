@@ -1,0 +1,7 @@
+* {
+    font-family: system-ui !important;
+}
+
+pre *, pre, .pre {
+    font-family: monospace !important;
+}
