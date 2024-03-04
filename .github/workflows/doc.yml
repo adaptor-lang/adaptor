@@ -4,27 +4,35 @@ on:
     branches:
     - main 
 jobs:
-  docs:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
-    - name: Commit documentation changes
+    - uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+    - name: Build pages
       run: |
-        git clone https://github.com/adaptor-lang/adaptor.git --branch gh-pages --single-branch gh-pages
-        cp -r docs/_build/html/* gh-pages/
-        cd gh-pages
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation" -a || true
-        # The above command will fail if no changes were present, so we ignore
-        # the return code.
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: gh-pages
-        directory: gh-pages
-        github_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        pip install -r docs/requirements.txt
+        sphinx-build -M html docs dist
+        touch dist/.nojekyll
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
