@@ -1,0 +1,1 @@
+executable('adpc', 'main.cc')
