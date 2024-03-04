@@ -30,7 +30,7 @@ jobs:
         pip install -r docs/requirements.txt
         sphinx-build -M html docs dist 
         touch dist/.nojekyll
-   - name: Upload artifact
+    - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: "./dist/html"
