@@ -1,2 +1,2 @@
 sphinx
-myst-parser=2.0.0
+myst-parser==2.0.0
