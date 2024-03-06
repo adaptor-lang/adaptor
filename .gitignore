@@ -8,6 +8,11 @@ out
 
 _build
 
+# zig
+
+zig-out
+zig-cache
+
 # c/c++
 
 # Prerequisites
