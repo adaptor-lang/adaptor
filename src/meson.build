@@ -1,1 +1,0 @@
-executable('adpc', 'main.cc')

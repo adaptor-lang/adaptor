@@ -1,45 +1,49 @@
+================================
 The Adaptor Programming Language
 ================================
 
 A lightweight programming language designed for WebAssembly.
 
 .. contents:: Table of Contents
-   :depth: 3 
+   :depth: 4
    :backlinks: none
 
 .. warning::
     WIP: This project is under development.
 
 .. code-block:: plaintext
-   
+
     fn on_pizza(thing: string) string {
-        let greeting = thing + " on pizza"
-        return greeting 
+        let response = thing + " on pizza"
+        return response 
     }
 
     fn main() {
         let things = ["cheese", "salami", "pineapple"]
         for thing in things {
-            printf(on_pizza(thing))
+            println(on_pizza(thing))
         }
     }
 
 Why Adaptor?
-------------
+============
 
 Compact 
-^^^^^^^
+-------
 
 Small 
-^^^^^
+-----
 
 * Lightweight compiler that embeddable for web project.
 
-Specifications
---------------
+Language Reference
+==================
 
 Primitive types
-^^^^^^^^^^^^^^^
+---------------
+
+Numbers
+^^^^^^^
 
 * ``void``
 
@@ -59,6 +63,38 @@ Primitive types
 
 * ``f32``
 
+Boolean
+^^^^^^^
+
 * ``bool``
 
+String
+^^^^^^
+
 * ``string``
+
+Statements
+----------
+
+``if else``
+^^^^^^^^^^^
+
+``for``
+^^^^^^^
+
+``while``
+^^^^^^^^^
+
+adpx
+----
+
+.. code-block::
+
+   ctx.html(
+     _ {
+       h1("Hello world")
+     }
+   )
+
+FFI
+---
